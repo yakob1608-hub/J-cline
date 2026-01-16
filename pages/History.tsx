@@ -37,11 +37,12 @@ const History: React.FC<HistoryProps> = ({ history, onMovieSelect, onClearHistor
 
         {history.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {history.map((item) => (
+            {history.map((item, index) => (
               <MovieCard
                 key={`${item.movie.id}-${item.movie.media_type}`}
                 movie={item.movie}
                 onClick={onMovieSelect}
+                index={index}
               />
             ))}
           </div>

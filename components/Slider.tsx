@@ -53,13 +53,14 @@ const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFa
         className="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-2 md:snap-x md:snap-mandatory"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
-        {movies.map((movie) => (
+        {movies.map((movie, index) => (
           <div key={`${movie.id}-${movie.media_type}`} className="md:snap-start flex-none w-[160px] md:w-[220px]">
             <MovieCard
               movie={movie}
               onClick={onMovieClick}
               onFavoriteToggle={onToggleFavorite}
               isFavorited={favorites?.some(f => f.id === movie.id)}
+              index={index}
             />
           </div>
         ))}

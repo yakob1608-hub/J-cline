@@ -26,11 +26,12 @@ const MyList: React.FC<MyListProps> = ({ movies, onMovieSelect, onToggleMyList }
 
         {movies.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {movies.map((movie) => (
-              <MovieCard 
-                key={`${movie.id}-${movie.media_type}`} 
-                movie={movie} 
+            {movies.map((movie, index) => (
+              <MovieCard
+                key={`${movie.id}-${movie.media_type}`}
+                movie={movie}
                 onClick={onMovieSelect}
+                index={index}
               />
             ))}
           </div>

@@ -9,9 +9,10 @@ interface MovieCardProps {
   onClick: (movie: Movie) => void;
   onFavoriteToggle?: (movie: Movie) => void;
   isFavorited?: boolean;
+  index?: number;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick, onFavoriteToggle, isFavorited }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick, onFavoriteToggle, isFavorited, index = 0 }) => {
   const title = movie.title || movie.name;
   const rating = movie.vote_average.toFixed(1);
   const year = (movie.release_date || movie.first_air_date || '').split('-')[0];
@@ -24,8 +25,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick, onFavoriteToggle,
   };
 
   return (
-    <div 
-      className="relative flex flex-col group cursor-pointer transition-all duration-300"
+    <div
+      className={`relative flex flex-col group cursor-pointer transition-all duration-300 animate-in slide-in-from-bottom duration-500 md:animate-none`}
+      style={{ animationDelay: `${index * 100}ms` }}
       onClick={() => onClick(movie)}
     >
       <div className="aspect-[2/3] rounded-[2rem] overflow-hidden relative shadow-lg border border-white/5 bg-[#1a1b1e]">

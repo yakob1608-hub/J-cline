@@ -26,13 +26,14 @@ const Favorites: React.FC<FavoritesProps> = ({ movies, onMovieSelect, onToggleFa
 
         {movies.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {movies.map((movie) => (
-              <MovieCard 
-                key={movie.id} 
-                movie={movie} 
+            {movies.map((movie, index) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
                 onClick={onMovieSelect}
                 onFavoriteToggle={onToggleFavorite}
                 isFavorited={true}
+                index={index}
               />
             ))}
           </div>
