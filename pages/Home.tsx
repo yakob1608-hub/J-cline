@@ -254,6 +254,7 @@ const Home: React.FC<HomeProps> = ({
               onMovieClick={onMovieSelect}
               onToggleFavorite={onToggleFavorite}
               favorites={favorites}
+              enableAutoScroll={false}
             />
 
             <Slider
@@ -262,6 +263,7 @@ const Home: React.FC<HomeProps> = ({
               onMovieClick={onMovieSelect}
               onToggleFavorite={onToggleFavorite}
               favorites={favorites}
+              enableAutoScroll={false}
             />
 
             <Slider
@@ -270,6 +272,7 @@ const Home: React.FC<HomeProps> = ({
               onMovieClick={onMovieSelect}
               onToggleFavorite={onToggleFavorite}
               favorites={favorites}
+              enableAutoScroll={false}
             />
           </div>
         </>

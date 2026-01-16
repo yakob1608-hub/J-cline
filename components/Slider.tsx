@@ -10,9 +10,10 @@ interface SliderProps {
   onMovieClick: (movie: Movie) => void;
   onToggleFavorite?: (movie: Movie) => void;
   favorites?: Movie[];
+  enableAutoScroll?: boolean;
 }
 
-const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFavorite, favorites }) => {
+const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFavorite, favorites, enableAutoScroll = true }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = useCallback((direction: 'left' | 'right') => {
@@ -27,6 +28,8 @@ const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFa
   }, []);
 
   useEffect(() => {
+    if (!enableAutoScroll) return;
+
     const isTouchDevice =
       'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -37,7 +40,7 @@ const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFa
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [scroll]);
+  }, [scroll, enableAutoScroll]);
 
   if (!movies?.length) return null;
 
