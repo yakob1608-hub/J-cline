@@ -191,7 +191,7 @@ const Home: React.FC<HomeProps> = ({
 
           {/* Mobile Featured - Horizontal Slider */}
           <div className="lg:hidden">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="flex items-center gap-2 px-2">
                 <Play size={16} className="text-emerald-500" />
                 <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
