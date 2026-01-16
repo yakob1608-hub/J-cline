@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { tmdb } from '../services/tmdb';
 import { Movie, Genre } from '../types';
 import Hero from '../components/Hero';
@@ -37,29 +37,17 @@ const Home: React.FC<HomeProps> = ({
   const [loading, setLoading] = useState(true);
   const [filtering, setFiltering] = useState(false);
   const [featuredMovie, setFeaturedMovie] = useState<Movie | null>(null);
-  const featuredRef = useRef<HTMLDivElement>(null);
-
-  const scrollFeatured = useCallback(() => {
-    if (featuredRef.current) {
-      featuredRef.current.scrollBy({
-        left: 300,
-        behavior: 'smooth',
-      });
-    }
-  }, []);
+  const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
 
   useEffect(() => {
-    const isTouchDevice =
-      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (trendingAll.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentFeaturedIndex((prev) => (prev + 1) % trendingAll.length);
+      }, 4000);
 
-    if (isTouchDevice) return;
-
-    const interval = setInterval(() => {
-      scrollFeatured();
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [scrollFeatured]);
+      return () => clearInterval(interval);
+    }
+  }, [trendingAll]);
 
   useEffect(() => {
     const fetchInitial = async () => {
@@ -189,7 +177,7 @@ const Home: React.FC<HomeProps> = ({
             </div>
           )}
 
-          {/* Mobile Featured - Horizontal Slider */}
+          {/* Mobile Featured - Single Changing Card */}
           <div className="lg:hidden">
             <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="flex items-center gap-2 px-2">
@@ -198,26 +186,19 @@ const Home: React.FC<HomeProps> = ({
                   Featured
                 </h2>
               </div>
-              <div className="relative">
-                <div ref={featuredRef} className="flex overflow-x-auto no-scrollbar gap-6 px-1 pb-4 snap-x snap-mandatory" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}>
-                  {trendingAll.slice(0, 5).map((movie, index) => (
-                    <div
-                      key={movie.id}
-                      onClick={() => onMovieSelect(movie)}
-                      className="flex-none w-[280px] relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group snap-start"
-                    >
-                      <img
-                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        alt={movie.title || movie.name}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                      <div className="absolute bottom-10 left-8 right-8 text-center">
-                        <h2 className="text-2xl font-black uppercase tracking-tighter leading-none mb-4">{movie.title || movie.name}</h2>
-                        <button className="px-6 py-2 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">Watch Now</button>
-                      </div>
-                    </div>
-                  ))}
+              <div
+                onClick={() => onMovieSelect(trendingAll[currentFeaturedIndex])}
+                className="relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group animate-in fade-in duration-500"
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/original${trendingAll[currentFeaturedIndex]?.poster_path}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  alt={trendingAll[currentFeaturedIndex]?.title || trendingAll[currentFeaturedIndex]?.name}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute bottom-10 left-8 right-8 text-center">
+                  <h2 className="text-3xl font-black uppercase tracking-tighter leading-none mb-4">{trendingAll[currentFeaturedIndex]?.title || trendingAll[currentFeaturedIndex]?.name}</h2>
+                  <button className="px-8 py-3 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">Watch Now</button>
                 </div>
               </div>
             </div>
