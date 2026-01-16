@@ -457,15 +457,21 @@ const App: React.FC = () => {
           )}
         </main>
 
-        <footer className="ml-0 lg:ml-64 py-12 px-6 border-t text-center md:text-left mb-20 lg:mb-0" style={{ borderColor: 'var(--border-primary)', backgroundColor: 'var(--bg-secondary)' }}>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-              <span className="text-sm font-bold uppercase tracking-widest leading-none" style={{ color: 'var(--text-secondary)' }}>Powered by J-cline Engine</span>
-              <p className="text-xs mt-2 leading-none" style={{ color: 'var(--text-tertiary)' }}>© 2024 J-cline Streaming. All metadata from TMDB.</p>
+        <footer className="ml-0 lg:ml-64 py-16 px-6 text-center md:text-left mb-20 lg:mb-0 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(16, 17, 19, 0.95) 0%, rgba(31, 33, 37, 0.95) 100%)', backdropFilter: 'blur(20px)' }}>
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-emerald-500/5" />
+          <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-emerald-500/20 rounded-2xl flex items-center justify-center">
+                <div className="w-6 h-6 bg-emerald-500 rounded-lg" />
+              </div>
+              <div>
+                <span className="text-sm font-black uppercase tracking-widest leading-none bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">Powered by J-cline Engine</span>
+                <p className="text-xs mt-1 leading-none text-gray-500">© 2024 J-cline Streaming. All metadata from TMDB.</p>
+              </div>
             </div>
-            <div className="flex gap-6">
-              <span className="text-xs cursor-pointer transition-colors" style={{ color: 'var(--text-secondary)', ':hover': { color: 'var(--text-primary)' } }}>Privacy</span>
-              <span className="text-xs cursor-pointer transition-colors" style={{ color: 'var(--text-secondary)', ':hover': { color: 'var(--text-primary)' } }} onClick={() => handleNavigate('settings')}>Settings</span>
+            <div className="flex gap-8">
+              <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }}>Privacy</span>
+              <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }} onClick={() => handleNavigate('settings')}>Settings</span>
             </div>
           </div>
         </footer>
