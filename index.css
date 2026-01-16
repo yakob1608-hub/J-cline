@@ -1,0 +1,89 @@
+/* CSS Variables for Theme System */
+:root {
+  /* Dark theme (default) */
+  --bg-primary: #0f1014;
+  --bg-secondary: #1a1b1f;
+  --bg-tertiary: #2a2b2f;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --scrollbar-track: #0f1014;
+  --scrollbar-thumb: #2a2b2f;
+  --scrollbar-thumb-hover: #3a3b3f;
+}
+
+body.light {
+  /* Light theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #000000;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --scrollbar-track: #f8f9fa;
+  --scrollbar-thumb: #cccccc;
+  --scrollbar-thumb-hover: #aaaaaa;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+body:not(.light) ::-webkit-scrollbar-track {
+  background: #0f1014;
+}
+
+body.light ::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+body:not(.light) ::-webkit-scrollbar-thumb {
+  background: #2a2b2f;
+  border-radius: 10px;
+}
+
+body:not(.light) ::-webkit-scrollbar-thumb:hover {
+  background: #3a3b3f;
+}
+
+body.light ::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 10px;
+}
+
+body.light ::-webkit-scrollbar-thumb:hover {
+  background: #aaaaaa;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.glass-card {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.light .glass-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+body:not(.light) .glass-card {
+  background: rgba(255, 255, 255, 0.03);
+}
