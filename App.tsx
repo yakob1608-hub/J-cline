@@ -32,6 +32,22 @@ export interface NotificationItem {
   timestamp: number;
 }
 
+const Logo = () => (
+  <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
+    <circle cx="50" cy="45" r="35" fill="#10b981" />
+    <circle cx="50" cy="45" r="5" fill="white" />
+    <circle cx="50" cy="23" r="8" fill="white" />
+    <circle cx="71" cy="38" r="8" fill="white" />
+    <circle cx="63" cy="62" r="8" fill="white" />
+    <circle cx="37" cy="62" r="8" fill="white" />
+    <circle cx="29" cy="38" r="8" fill="white" />
+    <path
+      d="M40 75C40 75 55 85 80 85C95 85 100 80 100 80V74C100 74 90 80 80 80C60 80 40 72 40 72Z"
+      fill="#10b981"
+    />
+  </svg>
+);
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('home');
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
@@ -461,16 +477,14 @@ const App: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-emerald-500/5" />
           <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-emerald-500/20 rounded-2xl flex items-center justify-center">
-                <div className="w-6 h-6 bg-emerald-500 rounded-lg" />
-              </div>
+              <Logo />
               <div>
                 <span className="text-sm font-black uppercase tracking-widest leading-none bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">Powered by J-cline Engine</span>
-                <p className="text-xs mt-1 leading-none text-gray-500">© 2024 J-cline Streaming. All metadata from TMDB.</p>
+                <p className="text-xs mt-1 leading-none text-gray-500">© 2024 J-cline Streaming.</p>
               </div>
             </div>
             <div className="flex gap-8">
-              <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }}>Privacy</span>
+              <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }} onClick={() => handleNavigate('settings')}>Privacy</span>
               <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }} onClick={() => handleNavigate('settings')}>Settings</span>
             </div>
           </div>
