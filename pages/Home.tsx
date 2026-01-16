@@ -166,21 +166,36 @@ const Home: React.FC<HomeProps> = ({
             </div>
           )}
 
-          {/* Mobile Featured - Single Large Card */}
+          {/* Mobile Featured - Horizontal Slider */}
           <div className="lg:hidden">
-            <div
-              onClick={() => onMovieSelect(trendingAll[0])}
-              className="relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group"
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/original${trendingAll[0].poster_path}`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                alt="Featured"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              <div className="absolute bottom-10 left-8 right-8 text-center">
-                 <h2 className="text-3xl font-black uppercase tracking-tighter leading-none mb-4">{trendingAll[0].title || trendingAll[0].name}</h2>
-                 <button className="px-8 py-3 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">Watch Now</button>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-2 px-2">
+                <Play size={16} className="text-emerald-500" />
+                <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+                  Featured
+                </h2>
+              </div>
+              <div className="relative">
+                <div className="flex overflow-x-auto no-scrollbar gap-6 px-1 pb-4 snap-x snap-mandatory" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}>
+                  {trendingAll.slice(0, 5).map((movie, index) => (
+                    <div
+                      key={movie.id}
+                      onClick={() => onMovieSelect(movie)}
+                      className="flex-none w-[280px] relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group snap-start"
+                    >
+                      <img
+                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt={movie.title || movie.name}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                      <div className="absolute bottom-10 left-8 right-8 text-center">
+                        <h2 className="text-2xl font-black uppercase tracking-tighter leading-none mb-4">{movie.title || movie.name}</h2>
+                        <button className="px-6 py-2 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">Watch Now</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
