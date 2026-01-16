@@ -24,6 +24,13 @@ const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFa
     }
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      scroll('right');
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   if (!movies?.length) return null;
 
   return (
