@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { Movie } from '../types';
 import MovieCard from './MovieCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -15,21 +15,22 @@ interface SliderProps {
 const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFavorite, favorites }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = useCallback((direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollAmount = clientWidth * 0.8;
+      const isMobile = window.innerWidth < 768;
+      const scrollAmount = isMobile ? 200 : clientWidth * 0.8;
       const scrollTo = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
       scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
     }
-  };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       scroll('right');
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [scroll]);
 
   if (!movies?.length) return null;
 
