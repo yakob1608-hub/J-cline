@@ -111,10 +111,6 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onSignOut, user, themeMode,
                      </button>
                    )}
                 </div>
-                <div className="text-right">
-                   <p className={`text-[10px] font-black uppercase mb-1 ${themeMode === 'light' ? 'text-gray-600' : 'text-gray-500'}`}>Account ID</p>
-                   <p className={`text-xs font-mono ${themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>JC-88291-XL</p>
-                </div>
              </div>
 
             <div className="grid gap-4">
