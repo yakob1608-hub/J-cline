@@ -177,7 +177,7 @@ const Home: React.FC<HomeProps> = ({
             </div>
           )}
 
-          {/* Mobile Featured - Single Changing Card */}
+          {/* Mobile Featured - Hero Style */}
           <div className="lg:hidden">
             <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="flex items-center gap-2 px-2">
@@ -186,20 +186,34 @@ const Home: React.FC<HomeProps> = ({
                   Featured
                 </h2>
               </div>
-              <div
-                key={currentFeaturedIndex}
-                onClick={() => onMovieSelect(trendingAll[currentFeaturedIndex])}
-                className="relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group animate-in fade-in duration-1000"
-              >
-                <img
-                  src={`https://image.tmdb.org/t/p/original${trendingAll[currentFeaturedIndex]?.poster_path}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  alt={trendingAll[currentFeaturedIndex]?.title || trendingAll[currentFeaturedIndex]?.name}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <div className="absolute bottom-10 left-8 right-8 text-center">
-                  <h2 className="text-3xl font-black uppercase tracking-tighter leading-none mb-4">{trendingAll[currentFeaturedIndex]?.title || trendingAll[currentFeaturedIndex]?.name}</h2>
-                  <button className="px-8 py-3 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">Watch Now</button>
+              <div className="relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group">
+                <div className="absolute inset-0 w-full h-full">
+                  {trendingAll.slice(0, 6).map((movie, index) => (
+                    <div
+                      key={movie.id}
+                      className={`absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out transform ${
+                        index === currentFeaturedIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'
+                      }`}
+                    >
+                      <img
+                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                        className="w-full h-full object-cover"
+                        alt={movie.title || movie.name}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                    </div>
+                  ))}
+                </div>
+                <div className="absolute bottom-10 left-8 right-8 text-center z-10">
+                  <h2 className="text-3xl font-black uppercase tracking-tighter leading-none mb-4 transition-all duration-700" key={trendingAll[currentFeaturedIndex]?.id}>
+                    {trendingAll[currentFeaturedIndex]?.title || trendingAll[currentFeaturedIndex]?.name}
+                  </h2>
+                  <button
+                    onClick={() => onMovieSelect(trendingAll[currentFeaturedIndex])}
+                    className="px-8 py-3 bg-white text-black rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl"
+                  >
+                    Watch Now
+                  </button>
                 </div>
               </div>
             </div>
