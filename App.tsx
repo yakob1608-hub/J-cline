@@ -72,6 +72,7 @@ const App: React.FC = () => {
   const [showSignup, setShowSignup] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
 
   // Theme effect
@@ -484,7 +485,7 @@ const App: React.FC = () => {
               </div>
             </div>
             <div className="flex gap-8">
-              <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }} onClick={() => handleNavigate('settings')}>Privacy</span>
+              <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }} onClick={() => setShowPrivacy(true)}>Privacy</span>
               <span className="text-xs cursor-pointer transition-all duration-300 hover:text-emerald-400 hover:scale-105" style={{ color: 'var(--text-secondary)' }} onClick={() => handleNavigate('settings')}>Settings</span>
             </div>
           </div>
@@ -507,6 +508,49 @@ const App: React.FC = () => {
       )}
 
       <BottomNav activePage={currentPage} onNavigate={handleNavigate} />
+
+      {/* Privacy Modal */}
+      {showPrivacy && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="bg-[var(--bg-primary)] p-8 rounded-2xl w-full max-w-2xl relative border border-[var(--border-color)] max-h-[80vh] overflow-y-auto">
+            <button
+              onClick={() => setShowPrivacy(false)}
+              className="absolute top-4 right-4 text-white hover:text-gray-400 transition-colors"
+            >
+              ✕
+            </button>
+            <h2 className="text-2xl font-black uppercase text-white mb-6">Privacy Policy</h2>
+            <div className="text-gray-300 space-y-4 text-sm leading-relaxed">
+              <p>
+                <strong>J-cline Streaming Privacy Policy</strong>
+              </p>
+              <p>
+                This Privacy Policy describes how J-cline Streaming ("we," "us," or "our") collects, uses, and protects your information when you use our streaming service.
+              </p>
+              <h3 className="text-lg font-bold text-white mt-6">Information We Collect</h3>
+              <p>
+                We collect information you provide directly to us, such as when you create an account, update your profile, or contact us for support. This may include your name, email address, and preferences.
+              </p>
+              <h3 className="text-lg font-bold text-white mt-6">How We Use Your Information</h3>
+              <p>
+                We use the information we collect to provide, maintain, and improve our services, process transactions, send you technical notices and support messages, and communicate with you about products, services, and promotional offers.
+              </p>
+              <h3 className="text-lg font-bold text-white mt-6">Information Sharing</h3>
+              <p>
+                We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.
+              </p>
+              <h3 className="text-lg font-bold text-white mt-6">Data Security</h3>
+              <p>
+                We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+              </p>
+              <h3 className="text-lg font-bold text-white mt-6">Contact Us</h3>
+              <p>
+                If you have any questions about this Privacy Policy, please contact us at privacy@j-cline.com.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
