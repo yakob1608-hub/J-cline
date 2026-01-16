@@ -43,7 +43,7 @@ const Home: React.FC<HomeProps> = ({
     if (trendingAll.length > 0) {
       const interval = setInterval(() => {
         setCurrentFeaturedIndex((prev) => (prev + 1) % trendingAll.length);
-      }, 4000);
+      }, 6000);
 
       return () => clearInterval(interval);
     }
@@ -187,8 +187,9 @@ const Home: React.FC<HomeProps> = ({
                 </h2>
               </div>
               <div
+                key={currentFeaturedIndex}
                 onClick={() => onMovieSelect(trendingAll[currentFeaturedIndex])}
-                className="relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group animate-in fade-in duration-500"
+                className="relative aspect-[2/3] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 group animate-in fade-in duration-1000"
               >
                 <img
                   src={`https://image.tmdb.org/t/p/original${trendingAll[currentFeaturedIndex]?.poster_path}`}
