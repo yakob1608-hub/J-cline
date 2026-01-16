@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { tmdb } from '../services/tmdb';
 import { Movie, Genre } from '../types';
 import Hero from '../components/Hero';
@@ -37,6 +37,29 @@ const Home: React.FC<HomeProps> = ({
   const [loading, setLoading] = useState(true);
   const [filtering, setFiltering] = useState(false);
   const [featuredMovie, setFeaturedMovie] = useState<Movie | null>(null);
+  const featuredRef = useRef<HTMLDivElement>(null);
+
+  const scrollFeatured = useCallback(() => {
+    if (featuredRef.current) {
+      featuredRef.current.scrollBy({
+        left: 300,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const isTouchDevice =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (isTouchDevice) return;
+
+    const interval = setInterval(() => {
+      scrollFeatured();
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [scrollFeatured]);
 
   useEffect(() => {
     const fetchInitial = async () => {
@@ -176,7 +199,7 @@ const Home: React.FC<HomeProps> = ({
                 </h2>
               </div>
               <div className="relative">
-                <div className="flex overflow-x-auto no-scrollbar gap-6 px-1 pb-4 snap-x snap-mandatory" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}>
+                <div ref={featuredRef} className="flex overflow-x-auto no-scrollbar gap-6 px-1 pb-4 snap-x snap-mandatory" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}>
                   {trendingAll.slice(0, 5).map((movie, index) => (
                     <div
                       key={movie.id}
