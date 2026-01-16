@@ -16,19 +16,26 @@ const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFa
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = useCallback((direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const isMobile = window.innerWidth < 768;
-      const scrollAmount = isMobile ? 200 : clientWidth * 0.8;
-      const scrollTo = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
-    }
+    if (!scrollRef.current) return;
+
+    const scrollAmount = scrollRef.current.clientWidth * 0.8;
+
+    scrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
   }, []);
 
   useEffect(() => {
+    const isTouchDevice =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (isTouchDevice) return;
+
     const interval = setInterval(() => {
       scroll('right');
-    }, 2000);
+    }, 3000);
+
     return () => clearInterval(interval);
   }, [scroll]);
 
@@ -58,11 +65,14 @@ const Slider: React.FC<SliderProps> = ({ title, movies, onMovieClick, onToggleFa
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-2 md:snap-x md:snap-mandatory"
-        style={{ WebkitOverflowScrolling: 'touch' }}
+        className="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-2 snap-x snap-mandatory"
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          touchAction: 'pan-x',
+        }}
       >
         {movies.map((movie, index) => (
-          <div key={`${movie.id}-${movie.media_type}`} className="md:snap-start flex-none w-[160px] md:w-[220px]">
+          <div key={`${movie.id}-${movie.media_type}`} className="snap-start flex-none w-[160px] md:w-[220px]">
             <MovieCard
               movie={movie}
               onClick={onMovieClick}
