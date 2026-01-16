@@ -277,7 +277,7 @@ const Details: React.FC<DetailsProps> = ({
         {/* Video Player Section */}
         {showPlayer && (
           <div id="video-player-container" className="mb-24 w-full aspect-video rounded-[3rem] overflow-hidden bg-black border border-white/10 shadow-3xl animate-in slide-in-from-bottom-8 duration-700">
-            <iframe src={embedUrl} className="w-full h-full border-0" allowFullScreen title="Watch" />
+            <iframe src={embedUrl} className="w-full h-full border-0" allowFullScreen title="Watch" sandbox="allow-scripts allow-same-origin allow-presentation" />
           </div>
         )}
 
