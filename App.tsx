@@ -474,7 +474,7 @@ const App: React.FC = () => {
           )}
         </main>
 
-        <footer className={`ml-0 lg:ml-64 py-8 px-6 text-center md:text-left mb-20 lg:mb-0 relative overflow-hidden ${themeMode === 'light' ? 'bg-gray-100 border-t border-gray-200' : ''}`} style={themeMode === 'dark' ? { background: 'linear-gradient(135deg, rgba(16, 17, 19, 0.95) 0%, rgba(31, 33, 37, 0.95) 100%)', backdropFilter: 'blur(20px)' } : {}}>
+        <footer className="ml-0 lg:ml-64 py-8 px-6 text-center md:text-left mb-20 lg:mb-0 relative overflow-hidden" style={{ background: 'var(--footer-bg)', backdropFilter: 'var(--footer-backdrop)' }}>
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-emerald-500/5" />
           <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-3">

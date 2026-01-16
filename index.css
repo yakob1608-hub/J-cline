@@ -12,6 +12,8 @@
   --scrollbar-track: #0f1014;
   --scrollbar-thumb: #2a2b2f;
   --scrollbar-thumb-hover: #3a3b3f;
+  --footer-bg: linear-gradient(135deg, rgba(16, 17, 19, 0.95) 0%, rgba(31, 33, 37, 0.95) 100%);
+  --footer-backdrop: blur(20px);
 }
 
 body.light {
@@ -27,6 +29,8 @@ body.light {
   --scrollbar-track: #f8f9fa;
   --scrollbar-thumb: #cccccc;
   --scrollbar-thumb-hover: #aaaaaa;
+  --footer-bg: #f8f9fa;
+  --footer-backdrop: none;
 }
 
 body {
